@@ -17,10 +17,8 @@ All solutions in this repository were written by
 
 This project is pinned by `lean-toolchain`.
 
-The block-bound proof now avoids the old 100+ file length-by-length brute-force
-fanout for lengths 7 through 13. Those cases are handled by the algebraic
-Parikh-matrix bridge, leaving only the length-6 spanning check as a small finite
-computation.
+The block-bound proof uses an algebraic Parikh-matrix bridge, leaving only the
+length-6 spanning check as a small finite computation.
 
 ```bash
 lake exe cache get
