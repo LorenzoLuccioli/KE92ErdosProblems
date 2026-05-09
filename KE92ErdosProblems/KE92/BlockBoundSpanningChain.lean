@@ -10,7 +10,7 @@ set_option maxHeartbeats 8000000
 namespace KE92
 
 theorem inner_defect_gives_AS (w : List (Fin 4))
-    (hm14 : w.length ≥ 14) (r L : ℕ) (hL : L > 0) (hr : r < 85)
+    (hm_ge : w.length ≥ 7) (r L : ℕ) (hL : L > 0) (hr : r < 85)
     (hlen : r + 2 * L ≤ 85 * w.length)
     (hspan : (r + 2 * L - 1) / 85 + 1 = w.length)
     (hperm : ((applyKeranenG w).drop r |>.take L).Perm
@@ -28,7 +28,7 @@ theorem inner_defect_gives_AS (w : List (Fin 4))
     vGivesSomeAS wa wb we v = true := by
   have h_inner_count_bridge : ∀ c : Fin 4, ((List.count c (applyKeranenG (w.drop 1 |>.take ((r + L) / 85 - 1))) : Int) - (List.count c (applyKeranenG (w.drop ((r + L) / 85 + 1) |>.take (w.length - 2 - ((r + L) / 85)))) : Int)) = boundaryDelta (w.get ⟨0, by omega⟩) (w.get ⟨(r + L) / 85, by omega⟩) (w.get ⟨w.length - 1, by omega⟩) r ((r + L) % 85) c + (if (r + 2 * L - 85 * (w.length - 1)) = 85 then (List.count c (keranenG (w.get ⟨w.length - 1, by omega⟩)) : Int) else 0) := by
     intros c
-    apply inner_count_bridge w r L c hm14 hL hr hlen hspan hperm;
+    apply inner_count_bridge w r L c hm_ge hL hr hlen hspan hperm;
   have h_parikhSolutionVec_applyKeranenG : ∀ a : Fin 4, ∀ l : List (Fin 4), (List.count a (applyKeranenG l) : Int) = ∑ c : Fin 4, (parikhM a c : Int) * (List.count c l) := by
     intros a l
     have h_applyKeranenG_count_as_sum : (List.count a (applyKeranenG l) : Int) = ∑ c : Fin 4, (parikhM a c : Int) * (List.count c l) := by
@@ -155,9 +155,9 @@ private theorem case5_false (w : List (Fin 4)) (hw : FinAbelianSquareFree w)
       (if c = w.get ⟨w.length - 1, by omega⟩ then 1 else 0) +
       ((w.drop 1 |>.take (k - 1)).count c : Int) -
       ((w.drop (k + 1) |>.take (k - 2)).count c : Int) = 0) : False := by
-  have := hw 0 k ( by linarith ) ( by linarith ) ; simp_all +decide [ List.Perm ] ;
+  have := hw 0 k ( by linarith ) ( by linarith ) ; simp_all +decide ;
   contrapose! this; simp_all +decide [ List.perm_iff_count ] ;
-  intro c; specialize h c; rcases k with ( _ | _ | k ) <;> simp_all +decide [ List.take, List.drop ] ;
+  intro c; specialize h c; rcases k with ( _ | _ | k ) <;> simp_all +decide [ List.take ] ;
   · rcases w with ( _ | ⟨ a, _ | ⟨ b, _ | w ⟩ ⟩ ) <;> simp_all +decide [ List.count ];
     · lia;
     · lia;
@@ -209,7 +209,7 @@ private theorem vGivesSomeAS_cases (wa wb we : Fin 4) (v : Fin 4 → Int)
   · right; right; right; right; right; exact fun c => by linarith [h c]
 
 theorem no_spanning_large (w : List (Fin 4)) (hw : FinAbelianSquareFree w)
-    (hm : w.length ≥ 14)
+    (hm : w.length ≥ 7)
     (r L : ℕ) (hL : L > 0) (hr : r < 85)
     (hlen : r + 2 * L ≤ (applyKeranenG w).length)
     (hspan : (r + 2 * L - 1) / 85 + 1 = w.length)

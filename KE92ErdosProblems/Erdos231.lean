@@ -39,7 +39,6 @@ theorem erdos_problem_231_finite :
   simp [infBlock_length] at hlen
   intro hperm
   apply hf i l hl
-  convert hperm using 1 <;>
-    (refine List.ext_get ?_ ?_ <;> simp +arith +decide [infBlock] <;> omega)
+  convert hperm using 1 <;> (refine List.ext_get ?_ ?_ <;> simp +arith +decide [infBlock] <;> omega)
 
 end KE92

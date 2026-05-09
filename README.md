@@ -17,11 +17,10 @@ All solutions in this repository were written by
 
 This project is pinned by `lean-toolchain`.
 
-The original full proof performs a large finite case analysis using
-`native_decide`, so compiling it can take a very long time.  To make routine CI
-and editing practical, `KE92ErdosProblems/KE92/PaperCoreDefs.lean` overrides
-`native_decide` with `sorry` near the top of the file.  To verify the finite
-computations locally, comment out that macro line and run a local build.
+The block-bound proof now avoids the old 100+ file length-by-length brute-force
+fanout for lengths 7 through 13. Those cases are handled by the algebraic
+Parikh-matrix bridge, leaving only the length-6 spanning check as a small finite
+computation.
 
 ```bash
 lake exe cache get

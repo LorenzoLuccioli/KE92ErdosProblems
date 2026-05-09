@@ -1,12 +1,5 @@
 import Mathlib
 
-/-
-This repository disables the computational `native_decide` checks by default so
-the full project can typecheck in CI.  Comment out the macro below to verify the
-original finite computations locally; expect that build to take a long time.
--/
-macro "native_decide" : tactic => `(tactic| sorry)
-
 /-!
 # KE92 shared definitions and basic lemmas
 

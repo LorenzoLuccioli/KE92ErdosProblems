@@ -108,9 +108,9 @@ private lemma abelianSquare_flatMap_localize (w : List (Fin 4))
         applyKeranenG (w.take a) ++ applyKeranenG (w.drop a |>.take m) ++
           applyKeranenG (w.drop (a + m)) := by
     have h_split : w = w.take a ++ (w.drop a |>.take m) ++ w.drop (a + m) := by
-      simp +arith +decide [List.take_append, List.drop_append]
+      simp +arith +decide
     unfold applyKeranenG
-    simp +decide [List.flatMap_append]
+    simp +decide
     conv_lhs => rw [h_split, List.flatMap_append, List.flatMap_append]
     rw [List.append_assoc]
   have h_simplify :
@@ -303,8 +303,7 @@ theorem exists_inf_from_all_lengths
   simp_all +decide [FinAbelianSquareFree]
   contrapose! hf
   refine ⟨i + 2 * l, i, l, hl, by linarith, ?_⟩
-  convert h using 1 <;>
-    (refine List.ext_get ?_ ?_ <;> simp +decide [infBlock] <;> omega)
+  convert h using 1 <;> (refine List.ext_get ?_ ?_ <;> simp +decide [infBlock] <;> omega)
 
 /-- **Keränen 1992, Theorem 1.** There exists an infinite abelian-square-free
 word over a four-letter alphabet. -/

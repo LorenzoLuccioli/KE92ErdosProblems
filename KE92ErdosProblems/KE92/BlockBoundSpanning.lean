@@ -128,7 +128,7 @@ theorem map_sum_eq_weighted_count (l : List (Fin 4)) (f : Fin 4 → ℕ) :
 Core inner count identity: the Parikh bridge equation.
 -/
 theorem inner_count_bridge (w : List (Fin 4)) (r L : ℕ) (c : Fin 4)
-    (hm14 : w.length ≥ 14) (hL : L > 0) (hr : r < 85)
+    (hm_ge : w.length ≥ 7) (hL : L > 0) (hr : r < 85)
     (hlen : r + 2 * L ≤ 85 * w.length)
     (hspan : (r + 2 * L - 1) / 85 + 1 = w.length)
     (hperm : ((applyKeranenG w).drop r |>.take L).Perm
@@ -148,7 +148,7 @@ theorem inner_count_bridge (w : List (Fin 4)) (r L : ℕ) (c : Fin 4)
       linarith⟩)).take r).count c +
     ((applyKeranenG (w.take (w.length - 1))).count c) +
     ((keranenG (w.get ⟨w.length - 1, by
-      exact Nat.pred_lt ( ne_bot_of_gt hm14 )⟩)).take (r + 2 * L - 85 * (w.length - 1))).count c := by
+      exact Nat.pred_lt ( ne_bot_of_gt hm_ge )⟩)).take (r + 2 * L - 85 * (w.length - 1))).count c := by
       all_goals generalize_proofs at *;
       have h_eq : 2 * ((applyKeranenG w).take (r + L)).count c = ((applyKeranenG w).take r).count c + ((applyKeranenG w).take (r + 2 * L)).count c := by
         have h_eq : ((applyKeranenG w).take (r + L)).count c - ((applyKeranenG w).take r).count c = ((applyKeranenG w).take (r + 2 * L)).count c - ((applyKeranenG w).take (r + L)).count c := by
