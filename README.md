@@ -17,9 +17,6 @@ All solutions in this repository were written by
 
 This project is pinned by `lean-toolchain`.
 
-The block-bound proof uses an algebraic Parikh-matrix bridge, leaving only the
-length-6 spanning check as a small finite computation.
-
 ```bash
 lake exe cache get
 lake build

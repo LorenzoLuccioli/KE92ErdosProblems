@@ -8,12 +8,6 @@ files for Erdős problems 192 and 231.
 
 ## Performance notes
 
-The block-bound proof now uses the algebraic Parikh-matrix analysis in
-`BlockBoundSpanningChain.lean` for all spanning lengths at least 7. This replaces
-the old length-by-length brute-force `native_decide` modules for lengths 7 through
-13 and their bridge files. Only the length-6 spanning check remains as a small
-finite computation.
-
 Retained source files:
 
 - `../KE92.lean`: common paper file and main Keränen theorem package.
